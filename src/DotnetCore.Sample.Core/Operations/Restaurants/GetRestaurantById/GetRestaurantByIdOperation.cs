@@ -2,19 +2,19 @@ using System;
 using DotnetCore.Sample.Core.Operations.Abstractions;
 using DotnetCore.Sample.Core.Repositories;
 using DotnetCore.Sample.DataContract.V1.Restaurants;
-using DotnetCore.Sample.DataContract.V1.Restaurants.GetRestaurants;
+using DotnetCore.Sample.DataContract.V1.Restaurants.GetRestaurantById;
 
-namespace DotnetCore.Sample.Core.Operations.Restaurants.GetRestaurant
+namespace DotnetCore.Sample.Core.Operations.Restaurants.GetRestaurantById
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public class GetRestaurantOperation : BaseOperation<GetRestaurantRequest, GetRestaurantResponse>, IGetRestaurantOperation
+	public class GetRestaurantByIdOperation : BaseOperation<GetRestaurantByIdRequest, GetRestaurantByIdResponse>, IGetRestaurantByIdOperation
 	{
 		/// <summary>
 		/// Default constructor
 		/// </summary>
-		public GetRestaurantOperation(IUnitOfWork unitOfWork)
+		public GetRestaurantByIdOperation(IUnitOfWork unitOfWork)
 			: base(unitOfWork)
 		{
 		}
@@ -22,11 +22,11 @@ namespace DotnetCore.Sample.Core.Operations.Restaurants.GetRestaurant
 		/// <summary>
 		/// 
 		/// </summary>
-		protected override GetRestaurantResponse ProcessAsync(GetRestaurantRequest request)
+		protected override GetRestaurantByIdResponse ProcessAsync(GetRestaurantByIdRequest request)
 		{
 			var restaurant = this.UnitOfWork.RestaurantRepository.GetById(Guid.Parse(request.RestaurantId));
 
-			return new GetRestaurantResponse
+			return new GetRestaurantByIdResponse
 			{
 				Restaurant = new RestaurantResponseContract
 				{
@@ -41,7 +41,7 @@ namespace DotnetCore.Sample.Core.Operations.Restaurants.GetRestaurant
 		/// <summary>
 		/// 
 		/// </summary>
-		protected override bool ValidateAsync(GetRestaurantRequest request)
+		protected override bool ValidateAsync(GetRestaurantByIdRequest request)
 		{
 			if (!Guid.TryParse(request.RestaurantId, out _))
 			{

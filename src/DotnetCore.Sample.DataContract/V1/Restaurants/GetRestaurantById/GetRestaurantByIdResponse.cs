@@ -4,13 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotnetCore.Sample.DataContract.Abstractions;
 
-namespace DotnetCore.Sample.DataContract.V1.Restaurants.GetRestaurants
+namespace DotnetCore.Sample.DataContract.V1.Restaurants.GetRestaurantById
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public class GetRestaurantResponse : BaseResponse
+	public class GetRestaurantByIdResponse : BaseResponse
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public RestaurantResponseContract Restaurant { get; set; }
 	}
 }
