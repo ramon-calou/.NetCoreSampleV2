@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DotnetCore.Sample.Core\DotnetCore.Sample.Core.csproj" />
+    <ProjectReference Include="..\DotnetCore.Sample.DataContract\DotnetCore.Sample.DataContract.csproj" />
     <ProjectReference Include="..\DotnetCore.Sample.Repository\DotnetCore.Sample.Repository.csproj" />
   </ItemGroup>
 </Project>
