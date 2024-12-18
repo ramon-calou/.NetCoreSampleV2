@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.30.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DotnetCore.Sample.Core\DotnetCore.Sample.Core.csproj" />
   </ItemGroup>
 
