@@ -1,7 +1,17 @@
-using DotnetCore.Sample.Core.Operations.Restaurants.GetRestaurant;
 using DotnetCore.Sample.Core.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using DotnetCore.Sample.DataContract.V1.Restaurants.GetRestaurants;
+using DotnetCore.Sample.DataContract.V1.Restaurants;
+using DotnetCore.Sample.DataContract.V1.Restaurants.CreateRestaurant;
+using DotnetCore.Sample.Core.Operations.Restaurants.CreateRestaurant;
+using Microsoft.AspNetCore.Http;
+using DotnetCore.Sample.DataContract.V1.Restaurants.UpdateRestaurant;
+using DotnetCore.Sample.Core.Operations.Restaurants.UpdateRestaurant;
+using DotnetCore.Sample.DataContract.V1.Restaurants.DeleteRestaurant;
+using DotnetCore.Sample.Core.Operations.Restaurants.DeleteRestaurant;
+using DotnetCore.Sample.DataContract.V1.Restaurants.GetRestaurantById;
+using DotnetCore.Sample.Core.Operations.Restaurants.GetRestaurantById;
+using DotnetCore.Sample.Core.Operations.Restaurants.GetRestaurants;
 
 namespace DotnetCore.Sample.Api.Controllers.V1
 {
@@ -20,12 +30,12 @@ namespace DotnetCore.Sample.Api.Controllers.V1
 		[HttpGet]
 		public ActionResult Get([FromRoute] string restaurantId)
 		{
-			var request = new GetRestaurantRequest()
+			var request = new GetRestaurantByIdRequest()
 			{
 				RestaurantId = restaurantId
 			};
 
-			var operation = new GetRestaurantOperation(_unitOfWork);
+			var operation = new GetRestaurantByIdOperation(_unitOfWork);
 
 			var response = operation.Execute(request);
 
@@ -39,43 +49,109 @@ namespace DotnetCore.Sample.Api.Controllers.V1
 			}
 		}
 
-		// [HttpGet("{id:length(24)}", Name = "GetRestaurant")]
-		// [ProducesResponseType(StatusCodes.Status404NotFound)]
-		// public ActionResult<Restaurant> Get(string id)
-		// {
-		// 	var restaurant = _restaurantService.Get(id);
+		[HttpGet()]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		public ActionResult GetByFilters(
+			[FromQuery] string openHour,
+			[FromQuery] string closeHour,
+			[FromQuery] string name)
+		{
+			var request = new GetRestaurantsRequest()
+			{
+				CloseHour = closeHour,
+				Name = name,
+				OpenHour = openHour
+			};
 
-		// 	if (restaurant == null)
-		// 	{
-		// 		return NotFound();
-		// 	}
+			var operation = new GetRestaurantsOperation(_unitOfWork);
 
-		// 	return restaurant;
-		// }
+			var response = operation.Execute(request);
 
-		// [HttpGet("{time:length(4)}", Name = "GetRestaurantByTime")]
-		// [ProducesResponseType(StatusCodes.Status404NotFound)]
-		// public ActionResult<List<Restaurant>> GetByTime(string time)
-		// {
-		// 	var restaurant = _restaurantService.GetByTime(time);
+			if (response.Success)
+			{
+				return this.Ok(response);
+			}
+			else
+			{
+				return this.BadRequest(response);
+			}
+		}
 
-		// 	if (restaurant == null)
-		// 	{
-		// 		return NotFound();
-		// 	}
+		[HttpPost]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		public ActionResult Create([FromBody] RestaurantContract contract)
+		{
+			var request = new CreateRestaurantRequest()
+			{
+				RestaurantContract = contract
+			};
 
-		// 	return restaurant;
-		// }
+			var operation = new CreateRestaurantOperation(_unitOfWork);
 
-		// [HttpPost]
-		// [ProducesResponseType(StatusCodes.Status201Created)]
-		// [ProducesResponseType(StatusCodes.Status400BadRequest)]
-		// public ActionResult<Restaurant> Create(Restaurant restaurant)
-		// {
-		//     _restaurantService.Create(restaurant);
+			var response = operation.Execute(request);
 
-		//     return CreatedAtRoute("GetRestaurant", new { id = restaurant.Id.ToString() }, restaurant);
-		// }
+			if (response.Success)
+			{
+				return this.Ok(response);
+			}
+			else
+			{
+				return this.BadRequest(response);
+			}
+		}
+
+		[HttpPut]
+		[Route("{restaurantId}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		public ActionResult Update([FromRoute] string restaurantId, [FromBody] RestaurantContract contract)
+		{
+			var request = new UpdateRestaurantRequest()
+			{
+				RestaurantId = restaurantId,
+				RestaurantContract = contract
+			};
+
+			var operation = new UpdateRestaurantOperation(_unitOfWork);
+
+			var response = operation.Execute(request);
+
+			if (response.Success)
+			{
+				return this.Ok(response);
+			}
+			else
+			{
+				return this.BadRequest(response);
+			}
+		}
+
+		[HttpDelete]
+		[Route("Deactive/{restaurantId}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		public ActionResult Delete([FromRoute] string restaurantId)
+		{
+			var request = new DeleteRestaurantRequest()
+			{
+				RestaurantId = restaurantId
+			};
+
+			var operation = new DeleteRestaurantOperation(_unitOfWork);
+
+			var response = operation.Execute(request);
+
+			if (response.Success)
+			{
+				return this.Ok(response);
+			}
+			else
+			{
+				return this.BadRequest(response);
+			}
+		}
 
 		// [HttpPost]
 		// [ProducesResponseType(StatusCodes.Status201Created)]
@@ -91,36 +167,6 @@ namespace DotnetCore.Sample.Api.Controllers.V1
 		// 	}
 
 		// 	return StatusCode(400);
-		// }
-
-		// [HttpPut("{id:length(24)}")]
-		// public IActionResult Update(string id, Restaurant restaurantIn)
-		// {
-		// 	var restaurant = _restaurantService.Get(id);
-
-		// 	if (restaurant == null)
-		// 	{
-		// 		return NotFound();
-		// 	}
-
-		// 	_restaurantService.Update(id, restaurantIn);
-
-		// 	return NoContent();
-		// }
-
-		// [HttpDelete("{id:length(24)}")]
-		// public IActionResult Delete(string id)
-		// {
-		// 	var restaurant = _restaurantService.Get(id);
-
-		// 	if (restaurant == null)
-		// 	{
-		// 		return NotFound();
-		// 	}
-
-		// 	_restaurantService.Remove(restaurant.Id);
-
-		// 	return NoContent();
 		// }
 	}
 }
