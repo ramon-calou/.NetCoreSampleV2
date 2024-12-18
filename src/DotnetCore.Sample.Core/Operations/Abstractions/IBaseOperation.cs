@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DotnetCore.Sample.DataContract.Abstractions;
 
 namespace DotnetCore.Sample.Core.Operations.Abstractions
@@ -18,6 +19,6 @@ namespace DotnetCore.Sample.Core.Operations.Abstractions
 		/// <summary>
 		/// Async method to validate an entity of type T 
 		/// </summary>
-		bool Validate(TRequest entity);
+		(bool, List<string>) Validate(TRequest entity);
 	}
 }

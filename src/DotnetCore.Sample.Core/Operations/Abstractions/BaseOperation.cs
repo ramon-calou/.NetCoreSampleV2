@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using DotnetCore.Sample.Core.Repositories;
 using DotnetCore.Sample.DataContract.Abstractions;
 
@@ -36,11 +39,15 @@ namespace DotnetCore.Sample.Core.Operations.Abstractions
 			var response = new TResponse();
 			try
 			{
-				var validationResponse = this.Validate(request);
+				(var validationResponse, var errorsMessages) = this.Validate(request);
 				if (validationResponse)
 				{
 					response = this.ProcessAsync(request);
 					this.Commit();
+				}
+				else if (errorsMessages.Any())
+				{
+					response.ErrorMessage = string.Join(", ", errorsMessages);
 				}
 				else
 				{
@@ -59,9 +66,41 @@ namespace DotnetCore.Sample.Core.Operations.Abstractions
 		/// <summary>
 		/// 
 		/// </summary>
-		public bool Validate(TRequest request)
+		public (bool, List<string>) Validate(TRequest request)
 		{
-			return this.ValidateAsync(request);
+			var errors = this.ValidateAttributes(request);
+			if (errors.Any())
+			{
+				return (false, errors);
+			}
+
+			return (this.ValidateAsync(request), new List<string>());
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private List<string> ValidateAttributes(TRequest request)
+		{
+			var validationContext = new ValidationContext(request);
+			var validationResults = new List<ValidationResult>();
+			var errorMessages = new List<string>();
+
+			bool isValid = Validator.TryValidateObject(request, validationContext, validationResults, true);
+
+			if (!isValid)
+			{
+				foreach (var validationResult in validationResults)
+				{
+					errorMessages.Add(validationResult.ErrorMessage);
+				}
+			}
+			else
+			{
+				Console.WriteLine("Model is valid.");
+			}
+
+			return errorMessages;
 		}
 
 		/// <summary>
