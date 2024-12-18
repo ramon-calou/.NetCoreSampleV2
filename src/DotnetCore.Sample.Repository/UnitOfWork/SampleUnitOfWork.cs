@@ -34,7 +34,7 @@ namespace DotnetCore.Sample.Repository.UnitOfWork
 		{
 			MongoClient client = new MongoClient(settings.ConnectionString);
 
-			if (string.IsNullOrEmpty(settings.SampleDatabaseName))
+			if (!string.IsNullOrEmpty(settings.SampleDatabaseName))
 			{
 				_sampleRepository = client.GetDatabase(settings.SampleDatabaseName);
 			}

@@ -42,11 +42,16 @@ namespace DotnetCore.Sample.Core.Operations.Abstractions
 					response = this.ProcessAsync(request);
 					this.Commit();
 				}
+				else
+				{
+					response.ErrorMessage = "Error while validating the request contract";
+				}
+
 				return response;
 			}
 			catch (Exception e)
 			{
-				response.StackTrace = e.ToString();
+				response.ErrorMessage = e.ToString();
 				return response;
 			}
 		}

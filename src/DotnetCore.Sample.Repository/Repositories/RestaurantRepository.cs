@@ -40,41 +40,41 @@ namespace DotnetCore.Sample.Repository.Repositories
 			return restaurant;
 		}
 
-		// /// <summary>
-		// /// 
-		// /// </summary>
-		// public List<RestaurantEntity> GetByFilters(FilterDefinition<RestaurantEntity> filter)
-		// 	=> _restaurantCollection
-		// 		.Find(filter)
-		// 		.ToList();
+		/// <summary>
+		/// 
+		/// </summary>
+		public List<RestaurantEntity> GetByFilters(FilterDefinition<RestaurantEntity> filter)
+			=> _restaurantCollection
+				.Find(filter)
+				.ToList();
 
-		// /// <summary>
-		// /// 
-		// /// </summary>
-		// public RestaurantEntity GetById(Guid id)
-		// 	=> _restaurantCollection
-		// 		.Find(x => x.Id == id)
-		// 		.FirstOrDefault();
+		/// <summary>
+		/// 
+		/// </summary>
+		public RestaurantEntity GetById(Guid id)
+			=> _restaurantCollection
+				.Find(x => x.Id == id)
+				.FirstOrDefault();
 
-		// /// <summary>
-		// /// 
-		// /// </summary>
-		// public RestaurantEntity Insert(RestaurantEntity restaurant)
-		// {
-		// 	_restaurantCollection
-		// 		.InsertOne(restaurant);
-		// 	return restaurant;
-		// }
+		/// <summary>
+		/// 
+		/// </summary>
+		public RestaurantEntity Insert(RestaurantEntity restaurant)
+		{
+			_restaurantCollection
+				.InsertOne(restaurant);
+			return restaurant;
+		}
 
-		// /// <summary>
-		// /// 
-		// /// </summary>
-		// public RestaurantEntity Update(RestaurantEntity restaurantEntity)
-		// {
-		// 	var filter = Builders<RestaurantEntity>.Filter.Eq(x => x.Id, restaurantEntity.Id);
+		/// <summary>
+		/// 
+		/// </summary>
+		public RestaurantEntity Update(RestaurantEntity restaurantEntity)
+		{
+			var filter = Builders<RestaurantEntity>.Filter.Eq(x => x.Id, restaurantEntity.Id);
 
-		// 	_restaurantCollection.ReplaceOne(filter, restaurantEntity);
-		// 	return restaurantEntity;
-		// }
+			_restaurantCollection.ReplaceOne(filter, restaurantEntity);
+			return restaurantEntity;
+		}
 	}
 }

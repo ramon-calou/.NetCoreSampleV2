@@ -1,11 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DotnetCore.Sample.Core.Entities.Restaurant;
 using DotnetCore.Sample.Core.Operations.Abstractions;
 using DotnetCore.Sample.Core.Repositories;
-using DotnetCore.Sample.DataContract.Abstractions;
 using DotnetCore.Sample.DataContract.V1.Restaurants;
 using DotnetCore.Sample.DataContract.V1.Restaurants.GetRestaurants;
 
@@ -29,7 +24,7 @@ namespace DotnetCore.Sample.Core.Operations.Restaurants.GetRestaurant
 		/// </summary>
 		protected override GetRestaurantResponse ProcessAsync(GetRestaurantRequest request)
 		{
-			var restaurant = this.UnitOfWork.RestaurantRepository.GetById<RestaurantEntity>(Guid.Parse(request.RestaurantId));
+			var restaurant = this.UnitOfWork.RestaurantRepository.GetById(Guid.Parse(request.RestaurantId));
 
 			return new GetRestaurantResponse
 			{

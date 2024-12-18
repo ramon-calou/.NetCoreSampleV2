@@ -13,11 +13,11 @@ namespace DotnetCore.Sample.DataContract.Abstractions
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual bool Success => string.IsNullOrEmpty(StackTrace);
+		public virtual bool Success => string.IsNullOrEmpty(ErrorMessage);
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual string StackTrace { get; set; }
+		public virtual string ErrorMessage { get; set; }
 	}
 }
