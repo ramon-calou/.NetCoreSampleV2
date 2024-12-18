@@ -16,8 +16,9 @@ namespace DotnetCore.Sample.Api.Controllers.V1
 			_unitOfWork = unitOfWork;
 		}
 
+		[Route("{restaurantId}")]
 		[HttpGet]
-		public ActionResult Get(string restaurantId)
+		public ActionResult Get([FromRoute] string restaurantId)
 		{
 			var request = new GetRestaurantRequest()
 			{
