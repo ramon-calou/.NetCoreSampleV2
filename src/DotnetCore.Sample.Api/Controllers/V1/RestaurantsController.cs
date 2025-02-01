@@ -4,7 +4,6 @@ using DotnetCore.Sample.DataContract.V1.Restaurants.GetRestaurants;
 using DotnetCore.Sample.DataContract.V1.Restaurants;
 using DotnetCore.Sample.DataContract.V1.Restaurants.CreateRestaurant;
 using DotnetCore.Sample.Core.Operations.Restaurants.CreateRestaurant;
-using Microsoft.AspNetCore.Http;
 using DotnetCore.Sample.DataContract.V1.Restaurants.UpdateRestaurant;
 using DotnetCore.Sample.Core.Operations.Restaurants.UpdateRestaurant;
 using DotnetCore.Sample.DataContract.V1.Restaurants.DeleteRestaurant;

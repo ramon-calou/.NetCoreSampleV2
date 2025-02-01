@@ -10,6 +10,6 @@ namespace DotnetCore.Sample.DataContract.V1.Restaurants.CreateRestaurant
         /// <summary>
         /// 
         /// </summary>
-		RestaurantResponseContract Restaurant { get; set; }
+		public RestaurantResponseContract Restaurant { get; set; }
 	}
 }

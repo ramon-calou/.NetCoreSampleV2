@@ -14,6 +14,6 @@ namespace DotnetCore.Sample.Core.Entities.Abstraction
         /// <summary>
         /// 
         /// </summary>
-		public bool IsActive { get; set; }
+		public bool IsActive { get; set; } = true;
 	}
 }

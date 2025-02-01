@@ -26,6 +26,14 @@ namespace DotnetCore.Sample.Core.Operations.Restaurants.GetRestaurantById
 		{
 			var restaurant = this.UnitOfWork.RestaurantRepository.GetById(Guid.Parse(request.RestaurantId));
 
+			if(restaurant == null || !restaurant.IsActive)
+			{
+				return new GetRestaurantByIdResponse
+				{
+					ErrorMessage = "Restaurante não encontrado"
+				};
+			}
+
 			return new GetRestaurantByIdResponse
 			{
 				Restaurant = new RestaurantResponseContract
