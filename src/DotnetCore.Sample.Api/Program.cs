@@ -1,16 +1,38 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿
+using DotnetCore.Sample.Core.Repositories;
+using DotnetCore.Sample.Core.Settings;
+using DotnetCore.Sample.Repository.UnitOfWork;
 
-namespace DotnetCore.Sample.Api
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+// Registrando o UnitOfWork e ClienteService
+builder.Services.AddScoped<IUnitOfWork, SampleUnitOfWork>();
+builder.Services.AddSingleton<ISettings, AppSettings>();
+
+builder.Services
+	.AddControllers()
+	.AddJsonOptions(
+		options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-	class Program
-	{
-		public static void Main(string[] args)
-		{
-			CreateHostBuilder(args).Build().Run();
-		}
-
-		public static IWebHostBuilder CreateHostBuilder(string[] args) =>
-			Microsoft.AspNetCore.WebHost.CreateDefaultBuilder(args)
-				.UseStartup<Startup>();
-	}
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
