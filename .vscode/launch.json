@@ -5,14 +5,13 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": ".NET Core Launch (console)",
+			"name": ".NET Core Launch (web)",
 			"type": "coreclr",
 			"request": "launch",
 			"preLaunchTask": "build",
-			"program": "${workspaceFolder}/src/DotnetCore.Sample.Api/bin/Debug/netcoreapp3.1/DotnetCore.Sample.Api.dll",
+			"program": "${workspaceFolder}/src/DotnetCore.Sample.Api/bin/Debug/net8.0/DotnetCore.Sample.Api.dll",
 			"args": [],
 			"cwd": "${workspaceFolder}/src/DotnetCore.Sample.Api",
-			"console": "internalConsole",
 			"stopAtEntry": false,
 			"serverReadyAction": {
 				"action": "openExternally",

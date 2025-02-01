@@ -3,11 +3,37 @@
 	"tasks": [
 		{
 			"label": "build",
-			"command" : "dotnet",
+			"command": "dotnet",
 			"type": "process",
 			"args": [
 				"build",
-				"${workspaceFolder}./DotnetCore.Sample.sln"
+				"${workspaceFolder}/DotnetCore.Sample.sln",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary;ForceNoAlign"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "publish",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"publish",
+				"${workspaceFolder}/DotnetCore.Sample.sln",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary;ForceNoAlign"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "watch",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"watch",
+				"run",
+				"--project",
+				"${workspaceFolder}/DotnetCore.Sample.sln"
 			],
 			"problemMatcher": "$msCompile"
 		}
