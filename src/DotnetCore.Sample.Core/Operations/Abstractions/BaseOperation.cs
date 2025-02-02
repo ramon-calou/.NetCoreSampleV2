@@ -74,7 +74,9 @@ namespace DotnetCore.Sample.Core.Operations.Abstractions
 				return (false, errors);
 			}
 
-			return (this.ValidateAsync(request).Success, new List<string>());
+			var validationResponse = this.ValidateAsync(request);
+
+			return (validationResponse.Success, new List<string>{validationResponse.ErrorMessage});
 		}
 
 		/// <summary>
