@@ -1,4 +1,5 @@
 using DotnetCore.Sample.Core.Entities.User;
+using DotnetCore.Sample.Core.Extension;
 using DotnetCore.Sample.Core.Jwt;
 using DotnetCore.Sample.Core.Operations.Abstractions;
 using DotnetCore.Sample.Core.Repositories;
@@ -46,9 +47,9 @@ namespace DotnetCore.Sample.Core.Operations.Login
 
             this.FoundUser = this.UnitOfWork.UserRepository.GetByEmail(request.Email);
 
-            if (this.FoundUser == null)
+            if (this.FoundUser == null || !Argon2Helper.VerificarSenha(request.Password, this.FoundUser.Password))
             {
-                response.ErrorMessage = "User Not Found";
+                response.ErrorMessage = "Wrong Email or Password. Please check";
             }
 
             return response;

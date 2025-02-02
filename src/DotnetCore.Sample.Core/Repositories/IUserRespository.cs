@@ -9,5 +9,10 @@ namespace DotnetCore.Sample.Core.Repositories
 		/// Get <see cref="UserEntity" /> by Email
         /// </summary>
         UserEntity GetByEmail (string email);
+
+        /// <summary>
+		/// Insert <see cref="UserEntity" />
+        /// </summary>
+        void InsertOne(UserEntity user);
     }
 }

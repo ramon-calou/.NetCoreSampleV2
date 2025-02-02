@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Asp.Versioning;
 using DotnetCore.Sample.Core.Jwt;
 using DotnetCore.Sample.Core.Operations.Login;
 using DotnetCore.Sample.Core.Repositories;
@@ -11,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DotnetCore.Sample.Api.Controllers.V1
 {
     [Route("api/[controller]")]
+    [ApiVersion("1")]
     [ApiController]
     public class LoginController : ControllerBase
     {
