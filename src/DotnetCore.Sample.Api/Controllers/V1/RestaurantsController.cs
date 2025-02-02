@@ -11,11 +11,13 @@ using DotnetCore.Sample.Core.Operations.Restaurants.DeleteRestaurant;
 using DotnetCore.Sample.DataContract.V1.Restaurants.GetRestaurantById;
 using DotnetCore.Sample.Core.Operations.Restaurants.GetRestaurantById;
 using DotnetCore.Sample.Core.Operations.Restaurants.GetRestaurants;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotnetCore.Sample.Api.Controllers.V1
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Authorize]
 	public class RestaurantsController : ControllerBase
 	{
 		private readonly IUnitOfWork _unitOfWork;
