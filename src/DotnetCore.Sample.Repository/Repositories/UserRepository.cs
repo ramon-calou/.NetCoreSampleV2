@@ -29,5 +29,10 @@ namespace DotnetCore.Sample.Repository.Repositories
 
             return _userCollection.Find(filter).FirstOrDefault();
         }
+
+        public void InsertOne(UserEntity user)
+        {
+            _userCollection.InsertOne(user);
+        }
     }
 }
