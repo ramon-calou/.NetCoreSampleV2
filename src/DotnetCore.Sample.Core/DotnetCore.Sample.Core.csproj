@@ -7,13 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.3.1" /> -->
-    <!-- <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.1" /> -->
-    <!-- <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" /> -->
-    <!-- <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.2.0" /> -->
-
     <!-- Para que serve? -->
-
     <!-- <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="3.1.6" /> -->
     <!-- <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.3.1" /> -->
 
@@ -22,6 +16,9 @@
     <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
     <PackageReference Include="MongoDbGenericRepository" Version="1.6.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <!-- FOR JWT IMPLEMENTATION -->
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.12" />
 
     <!-- NÃO COMPATÍVEIS COM .NETCORE 8 -->
     <!-- <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.1" /> -->

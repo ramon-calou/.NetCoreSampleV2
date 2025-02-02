@@ -1,15 +1,27 @@
 ﻿
+using DotnetCore.Sample.Core.Jwt;
+using DotnetCore.Sample.Core.Middleware;
 using DotnetCore.Sample.Core.Repositories;
 using DotnetCore.Sample.Core.Settings;
 using DotnetCore.Sample.Repository.UnitOfWork;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+// Bind JWT settings from appsettings.json
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+builder.Services.AddSingleton<IJwtSettings>(sp => sp.GetRequiredService<IOptions<JwtSettings>>().Value);
+
+// Add JWT Authentication to the pipeline
+builder.Services.AddJwtAuthentication(builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>());
+
 // Registrando o UnitOfWork e ClienteService
 builder.Services.AddScoped<IUnitOfWork, SampleUnitOfWork>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddSingleton<ISettings, AppSettings>();
+builder.Services.AddSingleton<IJwtSettings, JwtSettings>();
 
 builder.Services
 	.AddControllers()

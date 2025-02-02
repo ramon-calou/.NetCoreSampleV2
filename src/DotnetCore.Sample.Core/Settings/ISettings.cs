@@ -10,9 +10,9 @@ namespace DotnetCore.Sample.Core.Settings
 		/// </summary>
 		string ConnectionString { get; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+		/// <summary>
+		/// 
+		/// </summary>
 		string SampleDatabaseName { get; }
 	}
 }

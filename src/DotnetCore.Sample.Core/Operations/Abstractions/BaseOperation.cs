@@ -74,7 +74,7 @@ namespace DotnetCore.Sample.Core.Operations.Abstractions
 				return (false, errors);
 			}
 
-			return (this.ValidateAsync(request), new List<string>());
+			return (this.ValidateAsync(request).Success, new List<string>());
 		}
 
 		/// <summary>
@@ -106,9 +106,9 @@ namespace DotnetCore.Sample.Core.Operations.Abstractions
 		/// <summary>
 		/// Abstract method for validation, to be implemented by derived classes
 		/// </summary>
-		virtual protected bool ValidateAsync(TRequest request)
+		virtual protected BaseResponse ValidateAsync(TRequest request)
 		{
-			return true;
+			return new BaseResponse();
 		}
 
 		/// <summary>
