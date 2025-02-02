@@ -25,11 +25,21 @@ namespace DotnetCore.Sample.Repository.UnitOfWork
 		/// <summary>
 		/// 
 		/// </summary>
+		private IUserRespository _userRepository;
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public IRestaurantRepository RestaurantRepository => _restaurantsRepository ??= new RestaurantRepository(_sampleRepository);
 
-        /// <summary>
-        /// 
-        /// </summary>
+		/// <summary>
+		/// 
+		/// </summary>
+		public IUserRespository UserRepository => _userRepository ??= new UserRepository(_sampleRepository);
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public SampleUnitOfWork(ISettings settings)
 		{
 			MongoClient client = new MongoClient(settings.ConnectionString);
