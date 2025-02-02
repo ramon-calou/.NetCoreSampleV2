@@ -1,5 +1,3 @@
-using System;
-
 namespace DotnetCore.Sample.Core.Repositories
 {
 	/// <summary>
@@ -11,6 +9,11 @@ namespace DotnetCore.Sample.Core.Repositories
 		/// 
 		/// </summary>
 		IRestaurantRepository RestaurantRepository { get; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		IUserRespository UserRepository { get; }
 
 		/// <summary>
 		/// 

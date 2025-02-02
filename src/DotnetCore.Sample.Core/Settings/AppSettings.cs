@@ -11,7 +11,7 @@ namespace DotnetCore.Sample.Core.Settings
 		/// <summary>
 		/// 
 		/// </summary>
-		static public IConfigurationRoot _content { get; }
+		static public IConfigurationRoot Content { get; }
 
 		/// <summary>
 		/// Default constructor
@@ -23,17 +23,17 @@ namespace DotnetCore.Sample.Core.Settings
 				.AddJsonFile("appsettings.json")
 				.AddEnvironmentVariables();
 
-			_content = builder.Build();
+			Content = builder.Build();
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public string ConnectionString => _content[nameof(ConnectionString)];
+		public string ConnectionString => Content[nameof(ConnectionString)];
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public string SampleDatabaseName => _content[nameof(SampleDatabaseName)];
-	}
+		public string SampleDatabaseName => Content[nameof(SampleDatabaseName)];
+    }
 }

@@ -1,6 +1,7 @@
 using System;
 using DotnetCore.Sample.Core.Operations.Abstractions;
 using DotnetCore.Sample.Core.Repositories;
+using DotnetCore.Sample.DataContract.Abstractions;
 using DotnetCore.Sample.DataContract.V1.Restaurants;
 using DotnetCore.Sample.DataContract.V1.Restaurants.GetRestaurantById;
 
@@ -26,7 +27,7 @@ namespace DotnetCore.Sample.Core.Operations.Restaurants.GetRestaurantById
 		{
 			var restaurant = this.UnitOfWork.RestaurantRepository.GetById(Guid.Parse(request.RestaurantId));
 
-			if(restaurant == null || !restaurant.IsActive)
+			if (restaurant == null || !restaurant.IsActive)
 			{
 				return new GetRestaurantByIdResponse
 				{
@@ -49,14 +50,18 @@ namespace DotnetCore.Sample.Core.Operations.Restaurants.GetRestaurantById
 		/// <summary>
 		/// 
 		/// </summary>
-		protected override bool ValidateAsync(GetRestaurantByIdRequest request)
+		protected override BaseResponse ValidateAsync(GetRestaurantByIdRequest request)
 		{
+			var response = new BaseResponse();
 			if (!Guid.TryParse(request.RestaurantId, out _))
 			{
-				return false;
+				return new BaseResponse
+				{
+					ErrorMessage = "Restaurant Not Found"
+				};
 			}
 
-			return true;
+			return response;
 		}
 	}
 }
