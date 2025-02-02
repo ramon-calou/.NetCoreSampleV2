@@ -21,7 +21,6 @@ builder.Services.AddJwtAuthentication(builder.Configuration.GetSection("JwtSetti
 builder.Services.AddScoped<IUnitOfWork, SampleUnitOfWork>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddSingleton<ISettings, AppSettings>();
-builder.Services.AddSingleton<IJwtSettings, JwtSettings>();
 
 builder.Services
 	.AddControllers()
