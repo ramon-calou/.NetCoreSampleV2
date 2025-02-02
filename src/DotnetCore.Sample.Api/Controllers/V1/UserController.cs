@@ -7,25 +7,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DotnetCore.Sample.Api.Controllers.V1
 {
-    [Route("api/[controller]")]
-    [ApiVersion("1")]
-    [ApiController]
-    [Authorize]
-    public class UserController : ControllerBase
-    {
-        private readonly IUnitOfWork _unitOfWork;
+	[Route("api/[controller]")]
+	[ApiVersion("1")]
+	[ApiController]
+	[Authorize]
+	public class UserController : ControllerBase
+	{
+		private readonly IUnitOfWork _unitOfWork;
 
-        public UserController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
+		public UserController(IUnitOfWork unitOfWork)
+		{
+			_unitOfWork = unitOfWork;
+		}
 
-        [HttpPost]
+		[HttpPost]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public ActionResult Create([FromBody] CreateUserRequestContract contract)
 		{
-			var bearerToken = this.HttpContext.Request.Headers["Authorization"];
+			var bearerToken = this.HttpContext.Request.Headers.Authorization;
+
 			var request = new CreateUserRequest()
 			{
 				RequestContract = contract,
@@ -45,5 +46,5 @@ namespace DotnetCore.Sample.Api.Controllers.V1
 				return this.BadRequest(response);
 			}
 		}
-    }
+	}
 }
