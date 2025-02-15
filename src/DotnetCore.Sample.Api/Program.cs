@@ -46,4 +46,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";  // Get Heroku port
+app.Urls.Add($"http://*:{port}");
+
+app.MapGet("/", () => "Hello, Heroku!");
+
 app.Run();
